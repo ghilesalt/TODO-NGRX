@@ -2,7 +2,42 @@
 WARNING !! 
 For Angular 17 when you create a project with `ng new my-app` you will not have app.module.ts. 
 So you have to add this argument `--no-standalone`
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.  
+## Install NGRX
+
+Run `ng add @ngrx/store@latest` for ngrx store.
+
+## Install TailwindCss
+
+Run `npm install -D tailwindcss postcss autoprefixer` and `npx tailwindcss init` for getting tailwind.config.js.
+
+## Configure tailwind.config.js
+
+Copy on tailwind.config.js 
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+for use tailwind as class.
+
+And add on src/styles.css next line :
+
+```css
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+```
+
+And add on angular.json at projects/architect/build/styles this next line :
+```json
+"./node_modules/tailwindcss/tailwind.css"
+```
+
 
 ## Development server
 
