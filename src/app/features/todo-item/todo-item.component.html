@@ -1,0 +1,71 @@
+<div class="flex p-4 justify-around items-center bg-gray-50 space-x-5 my-2">
+  <div class="w-1/5 flex justify-center items-center">{{ task?.id }}</div>
+  <div *ngIf="editTodo; else inputBlock" class="w-1/5 flex justify-center items-center cursor-pointer">
+    {{ task?.title }}
+  </div>
+  <div class="w-1/5 flex justify-center items-center">
+    <div
+      *ngIf="editTodo; else statusBlock"
+      class="cursor-pointer rounded p-2 shadow-md text-white font-semibold"
+      [class.bg-red-500]="todoStatus === 'Not started'"
+      [class.bg-orange-500]="todoStatus === 'In progress'"
+      [class.bg-green-500]="todoStatus === 'Finished'"
+    >
+      {{ task?.status }}
+    </div>
+
+    <ng-template #statusBlock>
+      <select
+        [(ngModel)]="todoStatus"
+        class="outline-none ml-2 p-2 rounded shadow-md text-black-100 placeholder-black-100 bg-white"
+        [class.bg-red-500]="todoStatus === 'Not started'"
+        [class.bg-orange-500]="todoStatus === 'In progress'"
+        [class.bg-green-500]="todoStatus === 'Finished'"
+      >
+        <option value="Not started" class="bg-red-500 text-white">
+          Not Started
+        </option>
+        <option value="In progress" class="bg-orange-500 text-white">
+          In Progress
+        </option>
+        <option value="Finished" class="bg-green-500 text-white">
+          Finished
+        </option>
+      </select>
+    </ng-template>
+  </div>
+  <ng-template #inputBlock>
+    <input
+      [(ngModel)]="todoInput"
+      class=" w-1/5 flex justify-center items-center outline-none ml-2 p-2 rounded shadow-md text-black-100 placeholder-black-100"
+      type="text"
+      placeholder="Update this task"
+    />
+  </ng-template>
+
+  <div class="justify-center space-x-5 w-1/5 flex items-center">
+    <button
+      *ngIf="editTodo; else elseBlock"
+      (click)="updateToggle()"
+      class="w-2/5 px-8 py-2 bg-blue-500 hover:bg-blue-400 rounded shadow-lg text-white font-semibold"
+    >
+      Edit
+    </button>
+
+    <ng-template #elseBlock>
+      <button
+        (click)="updateTodo()"
+        class=" w-2/5 px-8 py-2 bg-green-500 hover:bg-green-400  rounded shadow-lg text-white font-semibold"
+      >
+        Update
+      </button>
+    </ng-template>
+
+    <button
+      (click)="deleteTodo()"
+      class="w-2/5 px-8 py-2 bg-red-500 hover:bg-red-400 rounded shadow-lg text-white font-semibold"
+    >
+      Delete
+    </button>
+  </div>
+</div>

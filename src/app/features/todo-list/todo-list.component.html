@@ -1,0 +1,17 @@
+<ul>
+  <div class="flex justify-center text-center">
+    <h1 class="text-2xl font-bold">MY TODO LIST</h1>
+  </div>
+  <div>
+    <app-todo-input></app-todo-input>
+  </div>
+  <div class="flex p-4 test items-center bg-gray-50 space-x-5 my">
+    <div class="w-1/5 text-center font-semibold">ID</div>
+    <div class="w-1/5 text-center font-semibold">TASK</div>
+    <div class="w-1/5 text-center font-semibold">STATUS</div>
+    <div class="w-1/5 text-center font-semibold">ACTIONS</div>
+  </div>
+  <li *ngFor="let task of todos">
+    <app-todo-item [task]="task"></app-todo-item>
+  </li>
+</ul>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { TodoListComponent } from "./features/todo-list/todo-list.component";
+import { StoreModule } from '@ngrx/store';
+import { taskReducer } from './store/Task/task.reducer';
 
 @Component({
   selector: 'app-root',

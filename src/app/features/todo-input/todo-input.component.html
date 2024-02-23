@@ -1,0 +1,14 @@
+<div class="flex justify-center space-x-5 pt-10 pb-5">
+  <input
+    [(ngModel)]="todoInput"
+    class="outline-none bg-slate-100 rounded shadow-md"
+    type="text"
+    placeholder="Add a task"
+  />
+  <button
+    (click)="addTask(todoInput)"
+    class="px-8 py-2 bg-blue-500 hover:bg-blue-400 rounded shadow-lg text-white font-semibold"
+  >
+    Add
+  </button>
+</div>

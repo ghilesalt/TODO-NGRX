@@ -1,6 +1,8 @@
 # BnpList
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+WARNING !! 
+For Angular 17 when you create a project with `ng new my-app` you will not have app.module.ts. 
+So you have to add this argument `--no-standalone`
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.  
 
 ## Development server
 
