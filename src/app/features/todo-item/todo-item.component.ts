@@ -61,14 +61,8 @@ export class TodoItemComponent {
 
       this.store.dispatch(TaskActions.deleteTask({ task: deletedTask }));
       console.log('Deleted', deletedTask);
-
       this.store.select(todoSelector).subscribe((todos) => {
-        const updatedTasks = todos.filter(
-          (todos) => todos.id !== deletedTask.id
-        );
-        console.log('Filtered', todos);
-
-        this.taskService.saveTasksToLocalStorage(updatedTasks);
+        this.taskService.saveTasksToLocalStorage(todos);
       });
     }
   }
