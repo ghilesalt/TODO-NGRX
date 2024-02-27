@@ -61,9 +61,6 @@ export class TodoItemComponent {
 
       this.store.dispatch(TaskActions.deleteTask({ task: deletedTask }));
       console.log('Deleted', deletedTask);
-      this.store.select(todoSelector).subscribe((todos) => {
-        this.taskService.saveTasksToLocalStorage(todos);
-      });
     }
   }
 }
