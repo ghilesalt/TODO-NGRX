@@ -1,46 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { TodoItemComponent } from "../todo-item/todo-item.component";
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { TaskService } from '../../services/task.service';
 import { Task } from '../../store/Task/task.model';
-import { Store, StoreModule, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import {  todoSelector } from '../../store/Task/task.selector';
-import { addTask } from '../../store/Task/task.actions';
-import { taskReducer } from '../../store/Task/task.reducer';
+import { todoSelector } from '../../store/Task/task.selector';
 import { TodoInputComponent } from '../todo-input/todo-input.component';
-
+import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 @Component({
-    selector: 'app-todo-list',
-    standalone: true,
-    templateUrl: './todo-list.component.html',
-    styleUrl: './todo-list.component.css',
-    imports: [TodoItemComponent,CommonModule,TodoInputComponent,]
+  selector: 'app-todo-list',
+  standalone: true,
+  templateUrl: './todo-list.component.html',
+  styleUrl: './todo-list.component.css',
+  imports: [TodoItemComponent, CommonModule, TodoInputComponent],
 })
-export class TodoListComponent implements OnInit{
+export class TodoListComponent implements OnInit {
   todos: Task[] = [];
 
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store, private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.getAllTasks()
+    this.getAllTasks();
+    this.todos = this.taskService.loadTasksToLocalStorage();
   }
 
-  getAllTasks(){
-
-  this.store.select(todoSelector).subscribe((state) => this.todos = state);
-
+  getAllTasks() {
+    this.store.select(todoSelector).subscribe((state) => (this.todos = state));
   }
-
-  // addTask(taskName: string, taskState: string = 'not started'): void {
-  //   if (!taskName) {
-  //     return;
-  //   }
-  //   const newTask: Task = { title: taskName, status: taskState, id: Math.random() };
-  //   this.store.dispatch(addTask({ task: newTask }));
-
-  //   console.log('Task added:', newTask);
-
-  // }
 }

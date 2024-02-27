@@ -3,10 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .test {
-   width: 100%;
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
+.line-through {
+  text-decoration: line-through;
+}

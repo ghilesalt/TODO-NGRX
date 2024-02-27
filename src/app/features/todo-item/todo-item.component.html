@@ -1,8 +1,16 @@
 <div class="flex p-4 justify-around items-center bg-gray-50 space-x-5 my-2">
   <div class="w-1/5 flex justify-center items-center">{{ task?.id }}</div>
-  <div *ngIf="editTodo; else inputBlock" class="w-1/5 flex justify-center items-center cursor-pointer">
-    {{ task?.title }}
+  <div
+    *ngIf="editTodo; else inputBlock"
+    class="w-1/5 flex justify-center items-center cursor-pointer"
+    [class.line-through]="task?.status === 'finished'"
+  >
+    <span *ngIf="todoStatus === 'Finished'" class="line-through">{{
+      task?.title
+    }}</span>
+    <span *ngIf="todoStatus !== 'Finished'">{{ task?.title }}</span>
   </div>
+
   <div class="w-1/5 flex justify-center items-center">
     <div
       *ngIf="editTodo; else statusBlock"
@@ -37,7 +45,7 @@
   <ng-template #inputBlock>
     <input
       [(ngModel)]="todoInput"
-      class=" w-1/5 flex justify-center items-center outline-none ml-2 p-2 rounded shadow-md text-black-100 placeholder-black-100"
+      class="w-1/5 flex justify-center items-center outline-none ml-2 p-2 rounded shadow-md text-black-100 placeholder-black-100"
       type="text"
       placeholder="Update this task"
     />
@@ -55,7 +63,7 @@
     <ng-template #elseBlock>
       <button
         (click)="updateTodo()"
-        class=" w-2/5 px-8 py-2 bg-green-500 hover:bg-green-400  rounded shadow-lg text-white font-semibold"
+        class="w-2/5 px-8 py-2 bg-green-500 hover:bg-green-400 rounded shadow-lg text-white font-semibold"
       >
         Update
       </button>

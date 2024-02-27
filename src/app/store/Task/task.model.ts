@@ -4,5 +4,4 @@ export interface Task {
   status: string;
 }
 
-
 export let todos: Task[] = [];
