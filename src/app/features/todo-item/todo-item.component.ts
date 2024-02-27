@@ -60,7 +60,6 @@ export class TodoItemComponent {
       };
 
       this.store.dispatch(TaskActions.deleteTask({ task: deletedTask }));
-      console.log('Deleted', deletedTask);
     }
   }
 }
