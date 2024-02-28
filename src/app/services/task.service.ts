@@ -10,7 +10,7 @@ export class TaskService {
 
   saveTasksToLocalStorage(tasks: Task[]): void {
     try {
-      localStorage.clear();
+      // localStorage.clear();
       localStorage.setItem('tasks', JSON.stringify(tasks));
     } catch (error) {
       console.error('Error saving tasks to local storage:', error);
@@ -19,7 +19,7 @@ export class TaskService {
 
   loadTasksToLocalStorage(): Task[] {
     try {
-      localStorage.clear();
+      // localStorage.clear();
       const tasksJson = localStorage.getItem('tasks');
       if (tasksJson) {
         const tasks: Task[] = JSON.parse(tasksJson);
