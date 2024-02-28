@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { TaskService } from '../../services/task.service';
 import { addTask } from '../../store/Task/task.actions';
 import { Task } from '../../store/Task/task.model';
-import { todoSelector } from '../../store/Task/task.selector';
 
 @Component({
   selector: 'app-todo-input',
@@ -21,26 +20,30 @@ export class TodoInputComponent {
 
   constructor(private store: Store, private taskService: TaskService) {}
 
-  ngOnInit(): void {
-    const data = this.store
-      .select(todoSelector)
-      .subscribe((state) => (this.todos = state));
-  }
+  ngOnInit(): void {}
 
   addTask(todoInput?: string): void {
     if (todoInput) {
+      // Créer une nouvelle tâche
       const newTask: Task = {
         title: todoInput,
         status: 'Not started',
-        id: this.todos.length,
+        id: this.todos.length, // Incrémenter l'ID de la nouvelle tâche
       };
 
-      const updatedTasks = [newTask];
+      // Charger les tâches existantes depuis le stockage local
+      const existingTasks = this.taskService.loadTasksToLocalStorage();
 
+      // Ajouter la nouvelle tâche à la liste existante
+      const updatedTasks = [...existingTasks, newTask];
+
+      // Sauvegarder la liste mise à jour dans le stockage local
       this.taskService.saveTasksToLocalStorage(updatedTasks);
 
+      // Mettre à jour la liste dans la mémoire de l'application
       this.todos = updatedTasks;
 
+      // Dispatch de l'action pour ajouter la tâche
       this.store.dispatch(addTask({ task: newTask }));
 
       console.log('Task added:', newTask);
