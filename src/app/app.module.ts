@@ -8,12 +8,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TodoInputComponent } from './features/todo-input/todo-input.component';
 import { TodoItemComponent } from './features/todo-item/todo-item.component';
 import { TodoListComponent } from './features/todo-list/todo-list.component';
 import { TaskEffects } from './store/Task/task.effects';
 import { taskReducer } from './store/Task/task.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [AppComponent],
   imports: [

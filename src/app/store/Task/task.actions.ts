@@ -10,10 +10,6 @@ export const updateTask = createAction(
   '[Task] Update Task',
   props<{ task: Task }>()
 );
-export const advanceTaskStatus = createAction(
-  '[Task] Advance Task Status',
-  props<{ task: Task }>()
-);
 
 export const addTaskSuccess = createAction(
   '[Task] Add Task Success', // Type de l'action
@@ -45,4 +41,4 @@ export const updateTaskFailure = createAction(
   props<{ error: any }>()
 );
 
-export const actions = [addTask, deleteTask, updateTask, advanceTaskStatus];
+export const actions = [addTask, deleteTask, updateTask];

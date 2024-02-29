@@ -1,6 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import * as TaskActions from './task.actions';
-import { Task, todos } from './task.model';
+import { Task } from './task.model';
 
 export interface TaskState {
   tasks: Task[];
@@ -11,20 +11,21 @@ export const initialState: TaskState = {
 };
 
 export const taskReducer = createReducer(
-  todos,
-  on(TaskActions.addTask, (state, { task }) => [...state, task]),
-  on(TaskActions.deleteTask, (state, { task }) =>
-    state.filter((t) => t.id !== task.id)
-  ),
-  on(TaskActions.updateTask, (state, { task }) =>
-    state.map((t) => (t.id === task.id ? task : t))
-  ),
-  on(TaskActions.advanceTaskStatus, (state, { task }) =>
-    state.map((t) =>
-      t.id === task.id ? { ...t, status: nextStatus(t.status) } : t
-    )
-  )
+  initialState,
+  on(TaskActions.addTask, (state, { task }) => ({
+    ...state,
+    tasks: [...state.tasks, task],
+  })),
+  on(TaskActions.deleteTask, (state, { task }) => ({
+    ...state,
+    tasks: state.tasks.filter((t) => t.id !== task.id),
+  })),
+  on(TaskActions.updateTask, (state, { task }) => ({
+    ...state,
+    tasks: state.tasks.map((t) => (t.id === task.id ? task : t)),
+  }))
 );
-function nextStatus(status: string): any {
-  throw new Error('Function not implemented.');
+
+export function reducer(state: TaskState | undefined, action: Action) {
+  return taskReducer(state, action);
 }

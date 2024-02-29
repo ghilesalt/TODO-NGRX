@@ -11,7 +11,10 @@
     <div class="w-1/5 text-center font-semibold">STATUS</div>
     <div class="w-1/5 text-center font-semibold">ACTIONS</div>
   </div>
-  <li *ngFor="let task of todos">
-    <app-todo-item [task]="task"></app-todo-item>
+  <li>
+    <app-todo-item
+      *ngFor="let task of todos$ | async"
+      [task]="task"
+    ></app-todo-item>
   </li>
 </ul>

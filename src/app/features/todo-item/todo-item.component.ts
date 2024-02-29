@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { TaskService } from '../../services/task.service';
 import * as TaskActions from '../../store/Task/task.actions';
 import { Task } from '../../store/Task/task.model';
-import { todoSelector } from '../../store/Task/task.selector';
 
 @Component({
   selector: 'app-todo-item',
@@ -20,8 +18,8 @@ export class TodoItemComponent {
   selectedTask?: Task;
   editTodo: boolean = false;
   todoStatus: string = 'Not started' || 'In progress' || 'Finished';
-  todos: Task[] = [];
-  constructor(private store: Store, private taskService: TaskService) {}
+
+  constructor(private store: Store<{ tasks: Task[] }>) {}
 
   ngOnInit(): void {
     this.editTodo = !this.editTodo;
@@ -44,9 +42,9 @@ export class TodoItemComponent {
 
       this.store.dispatch(TaskActions.updateTask({ task: updatedTask }));
 
-      this.store.select(todoSelector).subscribe((todos) => {
-        this.taskService.saveTasksToLocalStorage(todos);
-      });
+      // this.store.select(todoSelector).subscribe((todos) => {
+      //   this.taskService.saveTasksToLocalStorage(todos);
+      // });
     }
   }
 

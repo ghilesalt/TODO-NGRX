@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TaskService } from '../../services/task.service';
+import { Observable } from 'rxjs';
 import { Task } from '../../store/Task/task.model';
-import { todoSelector } from '../../store/Task/task.selector';
+import { selectTasks } from '../../store/Task/task.selector';
 import { TodoInputComponent } from '../todo-input/todo-input.component';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 
@@ -15,16 +15,13 @@ import { TodoItemComponent } from '../todo-item/todo-item.component';
   imports: [TodoItemComponent, CommonModule, TodoInputComponent],
 })
 export class TodoListComponent implements OnInit {
-  todos: Task[] = [];
+  todos$: Observable<Task[]>;
 
-  constructor(private store: Store, private taskService: TaskService) {}
-
-  ngOnInit(): void {
-    this.getAllTasks();
-    this.todos = this.taskService.loadTasksToLocalStorage();
+  constructor(private store: Store<{ tasks: Task[] }>) {
+    this.todos$ = store.select('tasks');
   }
 
-  getAllTasks() {
-    this.store.select(todoSelector).subscribe((state) => (this.todos = state));
+  ngOnInit(): void {
+    this.todos$ = this.store.select(selectTasks);
   }
 }
