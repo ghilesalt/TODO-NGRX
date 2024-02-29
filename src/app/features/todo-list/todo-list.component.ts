@@ -15,13 +15,13 @@ import { TodoItemComponent } from '../todo-item/todo-item.component';
   imports: [TodoItemComponent, CommonModule, TodoInputComponent],
 })
 export class TodoListComponent implements OnInit {
-  todos$: Observable<Task[]>;
+  todos: Observable<Task[]>;
 
   constructor(private store: Store<{ tasks: Task[] }>) {
-    this.todos$ = store.select('tasks');
+    this.todos = store.select('tasks');
   }
 
   ngOnInit(): void {
-    this.todos$ = this.store.select(selectTasks);
+    this.todos = this.store.select(selectTasks);
   }
 }

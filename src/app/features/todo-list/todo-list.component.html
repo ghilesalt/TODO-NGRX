@@ -13,7 +13,7 @@
   </div>
   <li>
     <app-todo-item
-      *ngFor="let task of todos$ | async"
+      *ngFor="let task of todos | async"
       [task]="task"
     ></app-todo-item>
   </li>
